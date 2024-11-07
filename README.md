@@ -1,3 +1,4 @@
 # Kissat_hyperparamoptimization
 Bachelor Thesis
-An environment to optimize hyperparameters with Sparkle
+An environment to optimize Kissat hyperparameters with Sparkle. 
+Kissat is a SAT solver developed by Armin Biere.
