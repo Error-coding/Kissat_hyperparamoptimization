@@ -12,7 +12,7 @@ def train(config: Configuration, seed: int = 0): #-> float:
     totaltime = 0
     for file in os.listdir("../instances/easy")[:3]:
         if file.endswith(".cnf"):
-            args = ("/home/raphael-zipperer/Uni/BA/kissat/bin/kissat-4.0.1-linux-amd64", 
+            args = ("..kissat/kissat", 
                 "../instances/easy/" + file, 
                 "--target=" + str(config["target"]),
                 "--restartint=" + str(config["restartint"]),
