@@ -1,0 +1,193 @@
+{
+  "stats": {
+    "submitted": 10,
+    "finished": 10,
+    "running": 0
+  },
+  "data": [
+    [
+      1,
+      null,
+      209652396,
+      null,
+      0.9029254913330078,
+      0.9031202793121338,
+      1,
+      1731153388.009577,
+      1731153388.9149246,
+      {}
+    ],
+    [
+      2,
+      null,
+      209652396,
+      null,
+      0.7194797992706299,
+      0.7197604179382324,
+      1,
+      1731153388.9236908,
+      1731153389.6455314,
+      {}
+    ],
+    [
+      3,
+      null,
+      209652396,
+      null,
+      0.7552592754364014,
+      0.755424976348877,
+      1,
+      1731153390.6362832,
+      1731153391.3934538,
+      {}
+    ],
+    [
+      4,
+      null,
+      209652396,
+      null,
+      0.7868766784667969,
+      0.787067174911499,
+      1,
+      1731153391.3991506,
+      1731153392.1883457,
+      {}
+    ],
+    [
+      5,
+      null,
+      209652396,
+      null,
+      0.7846488952636719,
+      0.7848327159881592,
+      1,
+      1731153392.1941955,
+      1731153392.9810534,
+      {}
+    ],
+    [
+      6,
+      null,
+      209652396,
+      null,
+      0.728071928024292,
+      0.728252649307251,
+      1,
+      1731153392.987588,
+      1731153393.7185147,
+      {}
+    ],
+    [
+      7,
+      null,
+      209652396,
+      null,
+      0.747596025466919,
+      0.7477529048919678,
+      1,
+      1731153393.7250054,
+      1731153394.4746814,
+      {}
+    ],
+    [
+      8,
+      null,
+      209652396,
+      null,
+      0.7929437160491943,
+      0.7931187152862549,
+      1,
+      1731153394.4813771,
+      1731153395.276366,
+      {}
+    ],
+    [
+      9,
+      null,
+      209652396,
+      null,
+      0.7264695167541504,
+      0.7267515659332275,
+      1,
+      1731153395.2841506,
+      1731153396.0129344,
+      {}
+    ],
+    [
+      10,
+      null,
+      209652396,
+      null,
+      0.7215826511383057,
+      0.7218453884124756,
+      1,
+      1731153396.0200784,
+      1731153396.7439013,
+      {}
+    ]
+  ],
+  "configs": {
+    "1": {
+      "probeint": 268,
+      "restartint": 6206,
+      "target": 0
+    },
+    "2": {
+      "probeint": 534,
+      "restartint": 3064,
+      "target": 2
+    },
+    "3": {
+      "probeint": 504,
+      "restartint": 4671,
+      "target": 2
+    },
+    "4": {
+      "probeint": 31,
+      "restartint": 4052,
+      "target": 2
+    },
+    "5": {
+      "probeint": 31,
+      "restartint": 3577,
+      "target": 2
+    },
+    "6": {
+      "probeint": 252,
+      "restartint": 5052,
+      "target": 2
+    },
+    "7": {
+      "probeint": 603,
+      "restartint": 4834,
+      "target": 2
+    },
+    "8": {
+      "probeint": 35,
+      "restartint": 7923,
+      "target": 2
+    },
+    "9": {
+      "probeint": 775,
+      "restartint": 5563,
+      "target": 2
+    },
+    "10": {
+      "probeint": 400,
+      "restartint": 4412,
+      "target": 2
+    }
+  },
+  "config_origins": {
+    "1": "Initial Design: Sobol",
+    "2": "Initial Design: Sobol",
+    "3": "Acquisition Function Maximizer: Local Search",
+    "4": "Acquisition Function Maximizer: Local Search",
+    "5": "Acquisition Function Maximizer: Local Search",
+    "6": "Acquisition Function Maximizer: Local Search",
+    "7": "Acquisition Function Maximizer: Local Search",
+    "8": "Acquisition Function Maximizer: Local Search",
+    "9": "Acquisition Function Maximizer: Local Search",
+    "10": "Acquisition Function Maximizer: Local Search"
+  }
+}
