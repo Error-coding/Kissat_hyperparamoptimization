@@ -38,7 +38,9 @@ def getinstances():
 
 def train(config: Configuration, seed: int = 0): #-> float:
     totaltime = 0
-    for file in random.shuffle(getinstances())[:kinstances]:
+    inst = getinstances()
+    random.shuffle(inst)
+    for file in inst[:kinstances]:
         args = ("../kissat/kissat", 
             file, 
             "--time=" + str(timeout),
