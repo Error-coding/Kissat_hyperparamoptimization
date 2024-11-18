@@ -17,7 +17,7 @@ timeout = int(sys.argv[2]) #timeout for a single instance
 kinstances = int(sys.argv[3]) #take k instances out of training set each run
 
 
-def getinstances(instancegroup):
+def getinstances():
     f=open("../instances_families.txt")
     lines=f.readlines()
     fams = lines[instancegroup].split()[1].split(",")
@@ -37,7 +37,7 @@ def getinstances(instancegroup):
 
 def train(config: Configuration, seed: int = 0): #-> float:
     totaltime = 0
-    for file in random.shuffle(getinstances(instancegroup))[:kinstances]:
+    for file in random.shuffle(getinstances())[:kinstances]:
         args = ("../kissat/kissat", 
             file, 
             "--time=" + str(timeout),
