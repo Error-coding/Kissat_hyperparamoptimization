@@ -17,9 +17,6 @@ timeout = int(sys.argv[2]) #timeout for a single instance
 kinstances = int(sys.argv[3]) #take k instances out of training set each run
 
 
-def printenv(output):
-    print("Task " + str(instancegroup) + ":" + output)
-
 def getinstances(instancegroup):
     f=open("../instances_families.txt")
     lines=f.readlines()
@@ -41,7 +38,6 @@ def getinstances(instancegroup):
 def train(config: Configuration, seed: int = 0): #-> float:
     totaltime = 0
     for file in random.shuffle(getinstances(instancegroup))[:kinstances]:
-        printenv()
         args = ("../kissat/kissat", 
             file, 
             "--time=" + str(timeout),
@@ -56,7 +52,7 @@ def train(config: Configuration, seed: int = 0): #-> float:
         try:
             output = subprocess.run(args, capture_output=True)
         except:
-            printenv("Solver failed")
+            print("Solver failed")
             
         end = time.time()
         outputstr = output.stdout.decode()
@@ -65,11 +61,11 @@ def train(config: Configuration, seed: int = 0): #-> float:
         for line in outputstr.splitlines():
             line = line.strip()
             if (line == r's SATISFIABLE') or (line == r's UNSATISFIABLE'):
-                printenv("Solved")
+                print("Solved")
                 status = True
                 break
             elif line == r's UNKNOWN':
-                printenv("Timeout")
+                print("Timeout")
                 status = False
                 break
 
@@ -111,4 +107,4 @@ scenario = Scenario(configspace, deterministic=True, n_trials=10, objectives="ru
 # Use SMAC to find the best configuration/hyperparameters
 smac = HyperparameterOptimizationFacade(scenario, train)
 incumbent = smac.optimize()
-printenv(incumbent)
+print(incumbent)
