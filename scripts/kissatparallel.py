@@ -32,6 +32,7 @@ def getinstances():
         
         feat = ["instances:local"]
         df = gbd.query ( "(track=main_2023 or track=main_2024) and family=coloring and minisat1m!=yes", resolve = feat)
+        print(df["local"].tolist())
         return df["local"].tolist()
 
 
