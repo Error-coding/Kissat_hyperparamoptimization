@@ -18,6 +18,7 @@ kinstances = int(sys.argv[3]) #take k instances out of training set each run
 
 
 def getinstances():
+    print("Getting instances")
     f=open("../instances_families.txt")
     lines=f.readlines()
     fams = lines[instancegroup].split()[1].split(",")
@@ -51,9 +52,6 @@ def train(config: Configuration, seed: int = 0): #-> float:
             arg = "--" + key + "=" + str(config[key])
             args = args + (arg,)
         
-        print(args)
-
-        print("Start")
         start = time.time()
         try:
             output = subprocess.run(args, capture_output=True)
@@ -61,7 +59,6 @@ def train(config: Configuration, seed: int = 0): #-> float:
             print("Solver failed")
             
         end = time.time()
-        print("End")
         outputstr = output.stdout.decode()
 
         status = False
@@ -85,6 +82,8 @@ def train(config: Configuration, seed: int = 0): #-> float:
 
 
 random.seed(31)
+
+print("Setting up config")
 
 configspace = ConfigurationSpace({"phase": (0, 2), "target": (0, 2), 
                                 "restartint": (1,10000), 
@@ -112,6 +111,8 @@ configspace.add(EqualsCondition(congruencexorarity, congruencexors, "true"))
 scenario = Scenario(configspace, deterministic=True, n_trials=10, objectives="runtime", output_directory = "../outputs/" + str(instancegroup))
 
 # Use SMAC to find the best configuration/hyperparameters
+
+print("Starting smac")
 smac = HyperparameterOptimizationFacade(scenario, train)
 incumbent = smac.optimize()
 print(incumbent)
