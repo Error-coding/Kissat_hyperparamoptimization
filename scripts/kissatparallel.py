@@ -50,7 +50,10 @@ def train(config: Configuration, seed: int = 0): #-> float:
         for key in config:
             arg = "--" + key + "=" + str(config[key])
             args = args + (arg,)
+        
+        print(args)
 
+        print("Start")
         start = time.time()
         try:
             output = subprocess.run(args, capture_output=True)
@@ -58,6 +61,7 @@ def train(config: Configuration, seed: int = 0): #-> float:
             print("Solver failed")
             
         end = time.time()
+        print("End")
         outputstr = output.stdout.decode()
 
         status = False
