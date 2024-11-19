@@ -73,11 +73,11 @@ def train(config: Configuration, seed: int = 0): #-> float:
         for line in outputstr.splitlines():
             line = line.strip()
             if (line == r's SATISFIABLE') or (line == r's UNSATISFIABLE'):
-                print("Solved")
+                print(str(instancegroup) + ": Solved")
                 status = True
                 break
             elif line == r's UNKNOWN':
-                print("Timeout")
+                print(str(instancegroup) + ": Timeout")
                 status = False
                 break
 
