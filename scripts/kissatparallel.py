@@ -38,7 +38,7 @@ def getinstances():
         feat = ["instances:local"]
         df = gbd.query ( "(track=main_2023 or track=main_2024) and " + famstring + " and minisat1m!=yes", resolve = feat)
         print(df["local"].tolist())
-        list = df["local"].tolist()
+        instlist = df["local"].tolist()
 
     return list(map(lambda x : "../instances/train/" + x.split("/")[-1], instlist))
 
