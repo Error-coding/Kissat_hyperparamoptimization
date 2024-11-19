@@ -19,7 +19,7 @@ kinstances = int(sys.argv[3]) #take k instances out of training set each run
 ntrials = int(sys.argv[4])
 
 
-def getinstances():
+"""def getinstances():
     print("Getting instances")
     f=open("../instances_families.txt")
     lines=f.readlines()
@@ -36,12 +36,31 @@ def getinstances():
         feat = ["instances:local"]
         df = gbd.query ( "(track=main_2023 or track=main_2024) and family=coloring and minisat1m!=yes", resolve = feat)
         print(df["local"].tolist())
-        return df["local"].tolist()
+        return df["local"].tolist()"""
+
+inst = []
+f=open("../instances_families.txt")
+lines=f.readlines()
+fams = lines[instancegroup].split()[1].split(",")
+
+famstring = "(family=" + fams[0]
+
+for i in range(1, len(fams)):
+    famstring += " or family=" + fams [i]
+famstring += ")"
+
+with GBD (["/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances/database/meta.db" , "/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances/database/instances.db"]) as gbd:
+    
+    feat = ["instances:local"]
+    df = gbd.query ( "(track=main_2023 or track=main_2024) and family=coloring and minisat1m!=yes", resolve = feat)
+    print(df["local"].tolist())
+    inst = df["local"].tolist()
 
 
 def train(config: Configuration, seed: int = 0): #-> float:
     totaltime = 0
-    inst = getinstances()
+    
+    #inst = ["../instances/easy/1.cnf", "../instances/easy/2.cnf"]#getinstances()
     random.shuffle(inst)
     for file in inst[:kinstances]:
         args = ("../kissat/kissat", 
