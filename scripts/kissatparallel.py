@@ -16,7 +16,7 @@ timeout = int(sys.argv[2]) #timeout for a single instance
 
 kinstances = int(sys.argv[3]) #take k instances out of training set each run
 
-ntrials = int(sys.argv[4])
+ntrials = int(sys.argv[4]) #how many times the train function is going to be called
 
 
 def getinstances():
