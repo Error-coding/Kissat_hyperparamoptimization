@@ -21,6 +21,6 @@ with GBD(["/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances/datab
 
 f.close()
 
-
+f2 = open('../instances/train/0.txt','a')
 for i in list(map(lambda x : ("../instances/train/" + x.split("/")[-1])[:-3], instlist)):
-    f2 = open('../instances/train/0.txt','w')
+    f2.write(i + '\n')
