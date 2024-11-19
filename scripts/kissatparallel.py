@@ -40,13 +40,14 @@ def getinstances():
         print(df["local"].tolist())
         instlist = df["local"].tolist()
 
-    return list(map(lambda x : "../instances/train/" + x.split("/")[-1], instlist))
+    return list(map(lambda x: x.substring(x.Length - 3) ,list(map(lambda x : "../instances/train/" + x.split("/")[-1], instlist))))
 
 
 def train(config: Configuration, seed: int = 0): #-> float:
     totaltime = 0
     
     inst = getinstances()
+    print(inst)
     random.shuffle(inst)
     for file in inst[:kinstances]:
         args = ("../kissat/kissat", 
@@ -68,7 +69,7 @@ def train(config: Configuration, seed: int = 0): #-> float:
         end = time.time()
         outputstr = output.stdout.decode()
 
-        status = False
+        status = True
         for line in outputstr.splitlines():
             line = line.strip()
             if (line == r's SATISFIABLE') or (line == r's UNSATISFIABLE'):
