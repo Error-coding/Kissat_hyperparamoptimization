@@ -40,7 +40,7 @@ def getinstances():
         print(df["local"].tolist())
         instlist = df["local"].tolist()
 
-    return list(map(lambda x: x.substring(x.Length - 3) ,list(map(lambda x : "../instances/train/" + x.split("/")[-1], instlist))))
+    return list(map(lambda x : ("../instances/train/" + x.split("/")[-1])[:-3], instlist))
 
 
 def train(config: Configuration, seed: int = 0): #-> float:
