@@ -16,6 +16,8 @@ timeout = int(sys.argv[2]) #timeout for a single instance
 
 kinstances = int(sys.argv[3]) #take k instances out of training set each run
 
+ntrials = int(sys.argv[4])
+
 
 def getinstances():
     print("Getting instances")
@@ -108,7 +110,7 @@ configspace.add(EqualsCondition(congruenceandarity, congruenceands, "true"))
 configspace.add(EqualsCondition(congruencexorarity, congruencexors, "true"))
 
 # Scenario object specifying the optimization environment
-scenario = Scenario(configspace, deterministic=True, n_trials=10, objectives="runtime", output_directory = "../outputs/" + str(instancegroup))
+scenario = Scenario(configspace, deterministic=True, n_trials=ntrials, objectives="runtime", output_directory = "../outputs/" + str(instancegroup))
 
 # Use SMAC to find the best configuration/hyperparameters
 
