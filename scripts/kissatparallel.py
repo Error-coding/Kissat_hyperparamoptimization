@@ -42,7 +42,7 @@ def getinstances():
 
     return list(map(lambda x : ("../instances/train/" + x.split("/")[-1])[:-3], instlist))
 
-# function to minimize
+# function to
 def train(config: Configuration, seed: int = 0): #-> float:
     totaltime = 0
     
