@@ -93,7 +93,7 @@ random.seed(31)
 
 print("Setting up config")
 
-configspace = ConfigurationSpace({"phase": (0, 2), "target": (0, 2), 
+configspace = ConfigurationSpace({"phase": ["true","false"], "target": (0, 2), 
                                 "restartint": (1,10000), 
                                 "probeint": (2, 1000), 
                                 "backbone": (0, 2),
