@@ -48,7 +48,7 @@ def train(config: Configuration, seed: int = 0): #-> float:
     
     inst = getinstances()
     print(inst)
-    random.shuffle(inst)
+    #random.shuffle(inst)
     for file in inst[:kinstances]:
         args = ("../kissat/kissat", 
             file, 
