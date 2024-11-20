@@ -6,7 +6,7 @@ conda activate SMAC
 
 cd /nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scripts
 
-for i in $(seq 0 15); do
+for i in $(seq 0 34); do
     OUT="/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scriptout/$i.out"
     ERR="/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scriptout/$i.err"
 
