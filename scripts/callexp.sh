@@ -13,4 +13,4 @@ for i in $(seq 0 15); do
     if [ ! -f $OUT ]; then
         echo "python3 /nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scripts/kissatparallel.py $i 5000 20 10"
     fi
-done | parallel -j 16
+done #| parallel -j 16

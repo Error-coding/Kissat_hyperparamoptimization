@@ -20,7 +20,7 @@ ntrials = int(sys.argv[4]) #how many times the train function is going to be cal
 
 
 def getinstances():
-    print("Getting instances")
+    print("Getting instances", flush=True)
     f=open("../instances_families.txt")
     lines=f.readlines()
     fams = lines[instancegroup].split()[1].split(",")
@@ -73,11 +73,11 @@ def train(config: Configuration, seed: int = 0): #-> float:
         for line in outputstr.splitlines():
             line = line.strip()
             if (line == r's SATISFIABLE') or (line == r's UNSATISFIABLE'):
-                print(str(instancegroup) + ": Solved")
+                print(str(instancegroup) + ": Solved", flush=True)
                 status = True
                 break
             elif line == r's UNKNOWN':
-                print(str(instancegroup) + ": Timeout")
+                print(str(instancegroup) + ": Timeout", flush=True)
                 status = False
                 break
 
