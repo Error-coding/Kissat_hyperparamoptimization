@@ -95,7 +95,7 @@ def train(config: Configuration, seed: int = 0): #-> float:
             args = args + (arg,)
         arglist.append(args)
 
-    print("Starting pool with %i threads", paralleldeg)
+    print("Starting pool with %i threads".format(paralleldeg))
     with pebble.ProcessPool(max_workers=paralleldeg) as p:
         futures = [p.schedule(runKissat, (args,)) for args in arglist]
         for f in as_completed(futures):
@@ -105,7 +105,7 @@ def train(config: Configuration, seed: int = 0): #-> float:
     return totaltime
 
 # Scenario object specifying the optimization environment
-scenario = Scenario(get_kissat2024_confspace(), deterministic=True, n_trials=ntrials, objectives="runtime", output_directory = "/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/outputs/parallelonefam/" + str(instancegroup))
+scenario = Scenario(get_kissat2024_confspace(), deterministic=True, n_trials=ntrials, output_directory = "/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/outputs/parallelonefam/" + str(instancegroup))
 
 # Use SMAC to find the best configuration/hyperparameters
 
