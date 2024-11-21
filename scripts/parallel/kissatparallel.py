@@ -24,6 +24,8 @@ ntrials = int(sys.argv[4]) #how many times the train function is going to be cal
 
 paralleldeg = int(sys.argv[5]) #how many parallel threads are going to be scheduled
 
+inst = []
+
 def getinstances():
     print("Getting instances", flush=True)
     f=open("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances_families.txt")
@@ -80,8 +82,6 @@ def train(config: Configuration, seed: int = 0): #-> float:
     totaltime = 0
     
 
-
-    inst = getinstances()
     arglist = []
     for file in inst[:kinstances]:
         args = ("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/kissat/kissat", 
@@ -95,7 +95,7 @@ def train(config: Configuration, seed: int = 0): #-> float:
             args = args + (arg,)
         arglist.append(args)
 
-    print("Starting pool with %i threads".format(paralleldeg))
+    print("Starting pool with {} threads and {} instances".format(paralleldeg, kinstances))
     with pebble.ProcessPool(max_workers=paralleldeg) as p:
         futures = [p.schedule(runKissat, (args,)) for args in arglist]
         for f in as_completed(futures):
@@ -103,6 +103,10 @@ def train(config: Configuration, seed: int = 0): #-> float:
 
         
     return totaltime
+
+random.seed(31)
+inst = getinstances()
+random.shuffle(inst)
 
 # Scenario object specifying the optimization environment
 scenario = Scenario(get_kissat2024_confspace(), deterministic=True, n_trials=ntrials, output_directory = "/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/outputs/parallelonefam/" + str(instancegroup))
