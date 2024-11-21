@@ -48,7 +48,7 @@ def getinstances():
     return list(map(lambda x : ("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances/train/" + x.split("/")[-1])[:-3], instlist))
 
 def runKissat(args):
-        
+    print("Started kissat")
     start = time.time()
     try:
         output = subprocess.run(args, capture_output=True)
@@ -95,7 +95,7 @@ def train(config: Configuration, seed: int = 0): #-> float:
             args = args + (arg,)
         arglist.append(args)
 
-    with pebble.ProcessPool(max_workers=paralleldeg, context=multiprocessing.get_context('forkserver')) as p:
+    with pebble.ProcessPool(max_workers=paralleldeg) as p:
         futures = [p.schedule(runKissat, (args)) for args in arglist]
         for f in as_completed(futures):
             totaltime += f.result
