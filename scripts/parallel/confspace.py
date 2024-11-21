@@ -153,10 +153,9 @@ def learnts_options():
     options += [tier1, tier1relative, tier2, tier2relative]
     
     # learned clause reduction
-    reducefraction = Integer("reducefraction", (10, 100), default=75)
     reducehigh = Integer("reducehigh", (0, 1000), default=900)
     reducelow = Integer("reducelow", (0, 1000), default=500)
-    options += [reducefraction, reducehigh, reducelow]
+    options += [reducehigh, reducelow]
     
     return options + conditions
 
