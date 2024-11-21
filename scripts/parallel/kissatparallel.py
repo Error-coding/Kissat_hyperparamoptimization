@@ -97,7 +97,7 @@ def train(config: Configuration, seed: int = 0): #-> float:
 
     print("Starting pool with %i threads", paralleldeg)
     with pebble.ProcessPool(max_workers=paralleldeg) as p:
-        futures = [p.schedule(runKissat, (args)) for args in arglist]
+        futures = [p.schedule(runKissat, (args,)) for args in arglist]
         for f in as_completed(futures):
             totaltime += f.result()
 
