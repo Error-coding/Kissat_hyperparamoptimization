@@ -104,7 +104,7 @@ def train(config: Configuration, seed: int = 0): #-> float:
     return totaltime
 
 # Scenario object specifying the optimization environment
-scenario = Scenario(get_kissat2024_confspace(), deterministic=True, n_trials=ntrials, objectives="runtime", output_directory = "/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/outputs/parallelonefam" + str(instancegroup))
+scenario = Scenario(get_kissat2024_confspace(), deterministic=True, n_trials=ntrials, objectives="runtime", output_directory = "/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/outputs/parallelonefam/" + str(instancegroup))
 
 # Use SMAC to find the best configuration/hyperparameters
 
