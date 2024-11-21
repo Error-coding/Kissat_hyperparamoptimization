@@ -10,7 +10,7 @@ import subprocess
 
 from gbd_core.api import GBD
 from concurrent.futures import as_completed
-from scripts.confspace.confspace import *
+from confspace import *
 
 
 
