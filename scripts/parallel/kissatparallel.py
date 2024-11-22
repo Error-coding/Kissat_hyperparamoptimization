@@ -81,7 +81,7 @@ def runKissat(args):
         return 2 * timeout
 
 
-def train(config: Configuration, seed: int = 0): #-> float:
+def train(config: Configuration, seed: int = 0): #-> float
     totaltime = 0
     called = 0
 
@@ -98,6 +98,8 @@ def train(config: Configuration, seed: int = 0): #-> float:
             args = args + (arg,)
         arglist.append(args)
 
+    print("Number args:" + str(len(arglist)))
+    
     print("Starting pool with {} threads and {} instances".format(paralleldeg, kinstances))
     with pebble.ProcessPool(max_workers=paralleldeg) as p:
         futures = [p.schedule(runKissat, (args,)) for args in arglist]
@@ -105,8 +107,10 @@ def train(config: Configuration, seed: int = 0): #-> float:
             try:    
                 totaltime += f.result()
                 called += 1
+                print("Result added to total", flush=True)
             except Exception as e:
                 print(e)
+    print(called)
     totaltime += (kinstances - called) * timeout
 
         
