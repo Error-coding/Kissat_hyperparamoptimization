@@ -80,7 +80,7 @@ def runKissat(args):
 
 def train(config: Configuration, seed: int = 0): #-> float:
     totaltime = 0
-    
+    called = 0
 
     arglist = []
     for file in inst[:kinstances]:
@@ -99,7 +99,12 @@ def train(config: Configuration, seed: int = 0): #-> float:
     with pebble.ProcessPool(max_workers=paralleldeg) as p:
         futures = [p.schedule(runKissat, (args,)) for args in arglist]
         for f in as_completed(futures):
-            totaltime += f.result()
+            try:    
+                totaltime += f.result()
+                called += 1
+            except Exception as e:
+                print(e)
+    totaltime += (kinstances - called) * timeout
 
         
     return totaltime
