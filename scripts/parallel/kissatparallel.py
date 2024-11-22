@@ -54,8 +54,8 @@ def runKissat(args):
     start = time.time()
     try:
         output = subprocess.run(args, capture_output=True)
-    except:
-        print("Solver failed")
+    except Exception as e:
+        print(e)
             
     end = time.time()
     outputstr = output.stdout.decode()
@@ -71,6 +71,9 @@ def runKissat(args):
             print(str(instancegroup) + ": Timeout", flush=True)
             status = False
             break
+        else:
+            print("Solver failed", flush=True)
+            status = False
 
     if(status):
         return end - start
