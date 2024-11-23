@@ -52,12 +52,21 @@ def getinstances():
 def runKissat(args):
     print("Started kissat")
     start = time.time()
+    output = None
     try:
-        output = subprocess.run(args, capture_output=True)
+        output = subprocess.run(args, capture_output=True, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error in running kissat: {e}", flush=True)
     except Exception as e:
-        print(e)
-            
+        print(f"Unexpected error: {e}", flush=True)
+
+    
     end = time.time()
+
+    if output is None:
+        print("No output from kissat, returning early")
+        return 2 * timeout
+    
     outputstr = output.stdout.decode()
 
     status = True
