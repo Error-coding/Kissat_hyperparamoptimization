@@ -12,14 +12,14 @@
 20 set-covering
 20 register-allocation
 20 profitable-robust-production
-20 product-configuration,pythagorean-triples,automata-synchronization,ramsey,ensemble-computation,edge-matching,clique-formulas,long-learned-clauses,hypertree-decomposition,erdos-discrepancy,clique-width,fermat,waerden,subset-cardinality,popularity-similarity,hardware-model-checking,theorem-proving,generic-csp,random-modularity,core-based-generator
+20 product-configuration,automata-synchronization,ramsey,ensemble-computation,edge-matching,clique-formulas,long-learned-clauses,hypertree-decomposition,erdos-discrepancy,clique-width,fermat,waerden,subset-cardinality,popularity-similarity,hardware-model-checking,theorem-proving,generic-csp,random-modularity,core-based-generator
 20 interval-matching
 20 hashtable-safety
 19 subsumptiontest,equivalence-chain-principle,risc-instruction-removal-subrv,risc-instruction-removal-golcrest,sgen
 19 school-timetabling
 19 quasigroup-completion,bitvector,cril-misc
 19 grs-fp-comm
-19 coloring,clique-colouring
+19 coloring,clique-colouring,pythagorean-triples
 19 brent-equations
 15 software-verification
 15 satcoin
