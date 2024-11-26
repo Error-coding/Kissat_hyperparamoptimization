@@ -67,11 +67,9 @@ def train(config: Configuration, seed: int = 0): #-> float:
             args = args + (arg,)
         
         start = time.time()
-
+        output= None
         try:
-            output = subprocess.run(args, capture_output=True, check=True)
-        except subprocess.CalledProcessError as e:
-            print(f"Error in running kissat: {e}", flush=True)
+            output = subprocess.run(args, capture_output=True)
         except Exception as e:
             print(f"Unexpected error: {e}", flush=True)
 
@@ -79,7 +77,7 @@ def train(config: Configuration, seed: int = 0): #-> float:
 
         if output is None:
             print("No output from kissat, returning early", flush=True)
-            return 2 * timeout    
+            return 2 * timeout * kinstances
 
         outputstr = output.stdout.decode()
 
