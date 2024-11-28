@@ -133,4 +133,4 @@ lines=f.readlines()
 for line in lines:
     parts = line.split(sep=": ")
     arg = {parts[0][1:-1] : int(parts[1].split(sep=",")[0])}
-    print(arg)
+    train(arg)
