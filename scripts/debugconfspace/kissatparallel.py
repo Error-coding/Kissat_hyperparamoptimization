@@ -88,6 +88,7 @@ def runKissat(args):
 
 
 def train(arg, seed: int = 0): #-> float
+    print("Train", flush=True)
     totaltime = 0
     called = 0
 
@@ -100,14 +101,14 @@ def train(arg, seed: int = 0): #-> float
                 "-n")
 
         for key in arg:
-            arg = "--" + key + "=" + str(arg[key])
-            args = args + (arg,)
+            val = "--" + key + "=" + str(arg[key])
+            args = args + (val,)
         arglist.append(args)
         arglist.append(args)
 
-    print("Number args:" + str(len(arglist)))
+    print("Number args:" + str(len(arglist)), flush=True)
     
-    print("Starting pool with {} threads and {} instances".format(paralleldeg, kinstances))
+    print("Starting pool with {} threads and {} instances".format(paralleldeg, kinstances), flush=True)
     with pebble.ProcessPool(max_workers=paralleldeg) as p:
         futures = [p.schedule(runKissat, (args,)) for args in arglist]
         for f in as_completed(futures):
@@ -134,4 +135,5 @@ for line in lines:
     print("Testing argument " + line)
     parts = line.split(sep=": ")
     arg = {parts[0][1:-1] : int(parts[1].split(sep=",")[0])}
+    print(arg)
     train(arg)
