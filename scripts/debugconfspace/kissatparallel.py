@@ -127,10 +127,11 @@ random.seed(31)
 inst = getinstances()
 random.shuffle(inst)
 
-f=open("./confs.txt")
+f=open("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scripts/debugconfspace/confs.txt")
 lines=f.readlines()
 
 for line in lines:
+    print("Testing argument " + line)
     parts = line.split(sep=": ")
     arg = {parts[0][1:-1] : int(parts[1].split(sep=",")[0])}
     train(arg)

@@ -2,7 +2,6 @@
 spack env activate smac3
 source /nfs/home/rzipperer/.bashrc
 conda activate SMAC
-cd /nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scripts/parallel
 
 OUT="/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scriptout/debug/$1.out"
 ERR="/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scriptout/debug/$1.err"
