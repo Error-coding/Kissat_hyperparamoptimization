@@ -137,9 +137,11 @@ random.shuffle(inst)
 f=open("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scripts/debugconfspace/confs.txt")
 lines=f.readlines()
 
+
+arguments = {}
 for line in lines:
     print("Testing argument " + line)
     parts = line.split(sep=": ")
-    arg = {parts[0][1:-1] : int(parts[1].split(sep=",")[0])}
-    print(arg)
-    train(arg)
+    arguments[parts[0][1:-1]] = int(parts[1].split(sep=",")[0])
+print(arguments)
+train(arguments)
