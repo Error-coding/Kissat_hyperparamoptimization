@@ -54,17 +54,24 @@ def runKissat(args):
     start = time.time()
     output = None
     try:
-        output = subprocess.run(args, capture_output=True, check=True)
+    # Run the subprocess without `check=True`
+        output = subprocess.run(args, capture_output=True)
+
+    # Check the returncode manually and handle 10 and 20 exit codes
+        if output.returncode in {10, 20}:
+            print(f"Process exited with expected code {output.returncode}, no error: {output.stderr.decode()}", flush=True)
+        elif output.returncode != 0:
+        # If it's some other non-zero exit code, raise an error
+            raise subprocess.CalledProcessError(output.returncode, args, output=output.stdout, stderr=output.stderr)
     except subprocess.CalledProcessError as e:
         print(f"Error in running kissat: {e}", flush=True)
     except Exception as e:
         print(f"Unexpected error: {e}", flush=True)
-
     
     end = time.time()
 
     if output is None:
-        print("No output from kissat, returning early")
+        print("No output from kissat, failing after {} seconds".format(end-start), flush=True)
         return 2 * timeout
     
     outputstr = output.stdout.decode()
