@@ -94,6 +94,7 @@ def train(config: Configuration, seed: int = 0): #-> float:
                 break
 
         if(status):
+            print("Instance " + file + "finished after {} seconds".format(end-start), flush=True)
             totaltime += end - start
         else:
             totaltime += 2 * timeout
