@@ -10,7 +10,7 @@ import subprocess
 
 from gbd_core.api import GBD
 from concurrent.futures import as_completed
-from confspace import *
+from confspace_toplevel import *
 
 
 
@@ -85,6 +85,7 @@ def runKissat(args):
             status = False
 
     if(status):
+        print("Instance " + args[1] + "finished after {} seconds".format(end-start), flush=True)
         return end - start
     else:
         return 2 * timeout
