@@ -21,7 +21,7 @@ ntrials = int(sys.argv[4]) #how many times the train function is going to be cal
 
 def getinstances():
     print("Getting instances", flush=True)
-    f=open("../instances_families.txt")
+    f=open("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances_families.txt")
     lines=f.readlines()
     fams = lines[instancegroup].split()[1].split(",")
 
@@ -43,7 +43,7 @@ def getinstances():
     return list(map(lambda x : ("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances/train/" + x.split("/")[-1])[:-3], instlist))
 
 # function to
-def train(config: Configuration, seed: int = 0): #-> float:
+def train(seed: int = 0): #-> float:
     totaltime = 0
     
     inst = getinstances()
@@ -56,9 +56,6 @@ def train(config: Configuration, seed: int = 0): #-> float:
             "-q",
             "-n")
 
-        for key in config:
-            arg = "--" + key + "=" + str(config[key])
-            args = args + (arg,)
         
         start = time.time()
         try:
@@ -91,4 +88,4 @@ def train(config: Configuration, seed: int = 0): #-> float:
 
 random.seed(31)
 
-print("Finished after {} seconds".format(train({})))
+print("Finished after {} seconds".format(train()))
