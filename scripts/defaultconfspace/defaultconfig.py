@@ -40,7 +40,7 @@ def getinstances():
         print(df["local"].tolist())
         instlist = df["local"].tolist()
 
-    return list(map(lambda x : ("../instances/train/" + x.split("/")[-1])[:-3], instlist))
+    return list(map(lambda x : ("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances/train/" + x.split("/")[-1])[:-3], instlist))
 
 # function to
 def train(config: Configuration, seed: int = 0): #-> float:
@@ -50,7 +50,7 @@ def train(config: Configuration, seed: int = 0): #-> float:
     print(inst)
     #random.shuffle(inst)
     for file in inst[:kinstances]:
-        args = ("../kissat/kissat", 
+        args = ("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/kissat/kissat_satcomp24", 
             file, 
             "--time=" + str(timeout),
             "-q",
