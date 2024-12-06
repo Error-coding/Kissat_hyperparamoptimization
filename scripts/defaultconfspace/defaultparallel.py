@@ -103,7 +103,7 @@ def train( seed: int = 0): #-> float
 
     arglist = []
     for file in inst[:kinstances]:
-        args = ("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/kissat/kissat", 
+        args = ("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/kissat/kissat_satcomp2024", 
                 file, 
                 "--time=" + str(timeout),
                 "-q",
