@@ -1,6 +1,6 @@
 # Credit for this wrapper of the configuration space of Kissat 2024 goes to Dr. Markus Iser
 
-# Added: Vivify, bump, randec, reorder, backbone, reluctant, substitute, sweep options
+# Added: Vivify, bump, randec, reorder, backbone, reluctant, substitute, sweep, probe, rephase options
 
 from ConfigSpace import ConfigurationSpace, Integer, InCondition
 
@@ -78,13 +78,13 @@ def phasing_options():
     
     # reinitialization of decision phases
     rephase = Integer("rephase", (0, 1), default=1)
-    #rephaseinit = Integer("rephaseinit", (10, 100000), default=1000)
-    #rephaseint = Integer("rephaseint", (10, 100000), default=1000)
-    options += [rephase]#, rephaseinit, rephaseint]
-    #conditions.append(InCondition(rephaseinit, rephase, [1]))
-    #conditions.append(InCondition(rephaseint, rephase, [1]))
+    rephaseinit = Integer("rephaseinit", (10, 100000), default=1000)
+    rephaseint = Integer("rephaseint", (10, 100000), default=1000)
+    options += [rephase, rephaseinit, rephaseint]
+    conditions.append(InCondition(rephaseinit, rephase, [1]))
+    conditions.append(InCondition(rephaseint, rephase, [1]))
     
-    return options #+ conditions
+    return options + conditions
 
 
 def decision_options():
@@ -199,7 +199,7 @@ def pre_and_inprocessing_options():
     proberounds = Integer("proberounds", (1, 10), default=2)
     options = [probe, proberounds]
     conditions = []
-    #conditions.append(InCondition(proberounds, probe, [1]))
+    conditions.append(InCondition(proberounds, probe, [1]))
     
     # binary clause backbone (2=eager)
     backbone = Integer("backbone", (0, 2), default=1)
@@ -327,7 +327,7 @@ def pre_and_inprocessing_options():
     #conditions.append(InCondition(subsumeclslim, forward, [1]))
     #conditions.append(InCondition(subsumeocclim, forward, [1]))
     
-    return options #+ conditions
+    return options + conditions
 
     
 def get_kissat2024_confspace() -> ConfigurationSpace:
