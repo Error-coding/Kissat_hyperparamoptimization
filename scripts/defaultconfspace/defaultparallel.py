@@ -108,6 +108,7 @@ def train( seed: int = 0): #-> float
                 "--time=" + str(timeout),
                 "-q",
                 "-n")
+        arglist.append(args)
     
     print("Starting pool with {} threads and {} instances".format(paralleldeg, kinstances))
     with pebble.ProcessPool(max_workers=paralleldeg) as p:
