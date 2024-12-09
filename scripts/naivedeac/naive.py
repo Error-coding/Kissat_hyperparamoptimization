@@ -4,7 +4,6 @@ import sys
 import random
 import pebble
 
-from smac import HyperparameterOptimizationFacade, Scenario
 from ConfigSpace import Configuration, ConfigurationSpace, EqualsCondition, Categorical, Integer
 import subprocess
 
@@ -52,7 +51,6 @@ def getinstances():
     return list(map(lambda x : ("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances/train/" + x.split("/")[-1])[:-3], instlist))
 
 def runKissat(args):
-    print("Started kissat")
     start = time.time()
     output = None
     try:
@@ -102,6 +100,7 @@ def runKissat(args):
 
 
 def run(config, seed: int = 0): #-> float
+    print("Config {}".format(config))
     totaltime = 0
     called = 0
 
