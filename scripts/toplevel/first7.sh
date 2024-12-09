@@ -11,6 +11,6 @@ for i in $(seq 0 6); do
     ERR="/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scriptout/toplevel/liskov/$i.err"
 
     if [ ! -f $OUT ]; then
-        echo "python3 /nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scripts/toplevel/parallelToplevel.py $i 5000 20 10 > $OUT 2> $ERR" 
+        echo "python3 /nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scripts/toplevel/parallelToplevel.py $i $1 $2 $3 $4 > $OUT 2> $ERR" 
     fi
 done | parallel -j 1
