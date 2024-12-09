@@ -125,7 +125,7 @@ def decision_options():
     return options #+ conditions
 
     
-def learnts_options():
+"""def learnts_options():
     # eagerly subsume previous learned clauses
     eagersubsume = Integer("eagersubsume", (0, 4), default=4)
     # jump binary reasons
@@ -158,7 +158,7 @@ def learnts_options():
     reducelow = Integer("reducelow", (0, 1000), default=500)
     options += [reducehigh, reducelow]
     
-    return options #+ conditions
+    return options #+ conditions"""
 
     
 def restart_options():
@@ -184,9 +184,9 @@ def restart_options():
     #conditions.append(InCondition(reluctantlim, reluctant, [1]))
     
     # fast and slow exponential moving average window
-    emafast = Integer("emafast", (10, 1000000), default=33)
+    """emafast = Integer("emafast", (10, 1000000), default=33)
     # emaslow = Integer("emaslow", (100, 1000000), default=100000) # used in more than one place (not just restarts), condition: slow > fast
-    options.append(emafast)
+    options.append(emafast)"""
     
     return options# + conditions
     
@@ -333,7 +333,7 @@ def get_kissat2024_confspace() -> ConfigurationSpace:
     cs.add(gate_options())
     cs.add(phasing_options())
     cs.add(decision_options())
-    cs.add(learnts_options())
+    #cs.add(learnts_options())
     cs.add(restart_options())
     cs.add(pre_and_inprocessing_options())
     return cs
