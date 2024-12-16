@@ -95,7 +95,7 @@ def runKissat(args):
         print("SOLVED: Instance " + args[1] + "was solved after {} seconds".format(end-start), flush=True)
         return end - start
     else:
-        print("TIMEOUT: Instance " + args[1] + " has reached timeout, punishment {} seconds".format(2 * 5000), flush=True)
+        print("TIMEOUT: Instance " + args[1] + " has reached timeout, punishment {} seconds".format(2 * timeout), flush=True)
         return 2 * timeout
 
 
