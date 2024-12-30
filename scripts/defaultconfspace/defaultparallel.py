@@ -126,7 +126,7 @@ def train( seed: int = 0): #-> float
         
     return totaltime
 
-random.seed(31)
+random.seed(52)
 inst = getinstances()
 random.shuffle(inst)
 
