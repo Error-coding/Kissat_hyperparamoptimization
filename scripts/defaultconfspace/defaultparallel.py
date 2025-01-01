@@ -102,7 +102,7 @@ def train( seed: int = 0): #-> float
     called = 0
 
     arglist = []
-    for file in inst[:kinstances]:
+    for file in inst:
         args = ("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/kissat/kissat_satcomp24", 
                 file, 
                 "--time=" + str(timeout),
@@ -110,7 +110,7 @@ def train( seed: int = 0): #-> float
                 "-n")
         arglist.append(args)
     
-    print("Starting pool with {} threads and {} instances".format(paralleldeg, kinstances))
+    print("Starting pool with {} threads and {} instances".format(paralleldeg, len(arglist)), flush=True)
     with pebble.ProcessPool(max_workers=paralleldeg) as p:
         futures = [p.schedule(runKissat, (args,)) for args in arglist]
         for f in as_completed(futures):
@@ -121,7 +121,7 @@ def train( seed: int = 0): #-> float
             except Exception as e:
                 print(e)
     print(called)
-    totaltime += (kinstances - called) * timeout
+    #totaltime += (kinstances - called) * timeout
 
         
     return totaltime
