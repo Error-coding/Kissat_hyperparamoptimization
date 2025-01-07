@@ -145,7 +145,7 @@ def getVivifyOpt():
 
 # No secondary opt for warmup
 
-def get_options(config_dict):
+def get_options(config_dict) -> ConfigurationSpace:
     options = []
     if config_dict.get("backbone", 0) != 0:
         options.extend(getBackboneOpt())
@@ -193,7 +193,7 @@ def get_options(config_dict):
         options.extend(getVivifyOpt())
     return options
 
-def getall():
+def getall() -> ConfigurationSpace:
     options = ConfigurationSpace(seed=0)
     options.add(getBackboneOpt())
     options.add(getBumpOpt())
