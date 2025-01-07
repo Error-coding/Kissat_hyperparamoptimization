@@ -14,7 +14,7 @@ def getBumpOpt():
     return [bumpreasons, decay]
 
 def getChronoOpt():
-    return [Integer("chronolevels", (0, 100000), default=100, log=True)]
+    return [Integer("chronolevels", (1, 100000), default=100, log=True)]
 
 def getCongruenceOpt():
     congruence_ands = Integer("congruenceands", (0, 1), default=1)
