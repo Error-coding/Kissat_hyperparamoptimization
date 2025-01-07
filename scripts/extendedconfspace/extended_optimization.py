@@ -134,7 +134,7 @@ def parse_string_to_dict(input_string):
     return result_dict
 
 
-f=open("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances_families.txt")
+f=open("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/toplevelsplit.txt")
 line=f.readlines()[instancegroup]
 instances = line.split(" ")[1:]
 configin = parse_string_to_dict(line.split(" ")[0])
