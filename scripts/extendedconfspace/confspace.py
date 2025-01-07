@@ -146,51 +146,51 @@ def getVivifyOpt():
 # No secondary opt for warmup
 
 def get_options(config_dict) -> ConfigurationSpace:
-    options = []
+    options = ConfigurationSpace(seed=0)
     if config_dict.get("backbone", 0) != 0:
-        options.extend(getBackboneOpt())
+        options.add(getBackboneOpt())
     if config_dict.get("bump", 0) != 0:
-        options.extend(getBumpOpt())
+        options.add(getBumpOpt())
     if config_dict.get("chrono", 0) != 0:
-        options.extend(getChronoOpt())
+        options.add(getChronoOpt())
     if config_dict.get("congruence", 0) != 0:
-        options.extend(getCongruenceOpt())
+        options.add(getCongruenceOpt())
     if config_dict.get("eliminate", 0) != 0:
-        options.extend(getEliminateOpt())
+        options.add(getEliminateOpt())
     if config_dict.get("extract", 0) != 0:
-        options.extend(getExtractOpt())
+        options.add(getExtractOpt())
     if config_dict.get("factor", 0) != 0:
-        options.extend(getFactorOpt())
+        options.add(getFactorOpt())
     if config_dict.get("fastel", 0) != 0:
-        options.extend(getFastelOpt())
+        options.add(getFastelOpt())
     if config_dict.get("forward", 0) != 0:
-        options.extend(getForwardOpt())
+        options.add(getForwardOpt())
     if config_dict.get("lucky", 0) != 0:
-        options.extend(getLuckyOpt())
+        options.add(getLuckyOpt())
     if config_dict.get("preprocess", 0) != 0:
-        options.extend(getPreprocessOpt())
+        options.add(getPreprocessOpt())
     if config_dict.get("probe", 0) != 0:
-        options.extend(getProbeOpt())
+        options.add(getProbeOpt())
     if config_dict.get("randec", 0) != 0:
-        options.extend(getRandecOpt())
+        options.add(getRandecOpt())
     if config_dict.get("reluctant", 0) != 0:
-        options.extend(getReluctantOpt())
+        options.add(getReluctantOpt())
     if config_dict.get("reorder", 0) != 0:
-        options.extend(getReorderOpt())
+        options.add(getReorderOpt())
     if config_dict.get("rephase", 0) != 0:
-        options.extend(getRephaseOpt())
+        options.add(getRephaseOpt())
     if config_dict.get("restart", 0) != 0:
-        options.extend(getRestartOpt())
+        options.add(getRestartOpt())
     if config_dict.get("stable", 0) != 0:
-        options.extend(getStableOpt())
+        options.add(getStableOpt())
     if config_dict.get("substitute", 0) != 0:
-        options.extend(getSubstituteOpt())
+        options.add(getSubstituteOpt())
     if config_dict.get("sweep", 0) != 0:
-        options.extend(getSweepOpt())
+        options.add(getSweepOpt())
     if config_dict.get("transitive", 0) != 0:
-        options.extend(getTransitiveOpt())
+        options.add(getTransitiveOpt())
     if config_dict.get("vivify", 0) != 0:
-        options.extend(getVivifyOpt())
+        options.add(getVivifyOpt())
     return options
 
 def getall() -> ConfigurationSpace:
