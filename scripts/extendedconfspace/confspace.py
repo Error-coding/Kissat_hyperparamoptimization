@@ -27,8 +27,8 @@ def getCongruenceOpt():
 def getEliminateOpt():
     eliminatebound = Integer("eliminatebound", (0, 8192), default=16)
     eliminateclslim = Integer("eliminateclslim", (1, 100000), default=100, log=True)
-    eliminateinit = Integer("eliminateinit", (0, 500000), default=500, log=True)
-    eliminateocclim = Integer("eliminateocclim", (0, 2000000), default=2000, log=True)
+    eliminateinit = Integer("eliminateinit", (1, 500000), default=500, log=True)
+    eliminateocclim = Integer("eliminateocclim", (1, 2000000), default=2000, log=True)
     eliminaterounds = Integer("eliminaterounds", (1, 10000), default=2, log=True)
     return [eliminatebound, eliminateclslim, eliminateinit, eliminateocclim, eliminaterounds]
 
@@ -40,7 +40,7 @@ def getExtractOpt():
     return [extract_and, extract_equiv, extract_ite, extract_def]
 
 def getFactorOpt():
-    factorcandrounds = Integer("factorcandrounds", (0, 1000), default=2, log=True)
+    factorcandrounds = Integer("factorcandrounds", (1, 1000), default=2, log=True)
     factorhops = Integer("factorhops", (1, 10), default=3)
     factoriniticks = Integer("factoriniticks", (1, 70000), default=700, log=True)
     factorsize = Integer("factorsize", (2, 5000), default=5)
@@ -48,7 +48,7 @@ def getFactorOpt():
     return [factorcandrounds, factorhops, factoriniticks, factorsize, factorstructural]
 
 def getFastelOpt():
-    fastelclslim = Integer("fastelclslim", (1, 10000), default=100)
+    fastelclslim = Integer("fastelclslim", (1, 10000), default=100, log=True)
     fastelim = Integer("fastelim", (1, 1000), default=8)
     fasteloccs = Integer("fasteloccs", (1, 1000), default=100)
     fastelrounds = Integer("fastelrounds", (1, 1000), default=4)
@@ -57,7 +57,7 @@ def getFastelOpt():
 
 def getForwardOpt():
     subsumeclslim = Integer("subsumeclslim", (1, 1000000), default=1000, log=True)
-    subsumeocclim = Integer("subsumeocclim", (0, 1000000), default=1000, log=True)
+    subsumeocclim = Integer("subsumeocclim", (1, 1000000), default=1000, log=True)
     return [subsumeclslim, subsumeocclim]
 
 # no second level parameters for phase/phasesaving
@@ -88,7 +88,7 @@ def getRandecOpt():
 
 def getReluctantOpt():
     reluctantint = Integer("reluctantint", (2, 32768), default=1024)
-    reluctantlim = Integer("reluctantlim", (0, 1073741824), default=1048576, log=True)
+    reluctantlim = Integer("reluctantlim", (1, 1073741824), default=1048576, log=True)
     return [reluctantint, reluctantlim]
 
 def getReorderOpt():
@@ -117,15 +117,15 @@ def getSubstituteOpt():
     return [substituteeffort, substituterounds]
 
 def getSweepOpt():
-    sweepclauses = Integer("sweepclauses", (0, 1024 *1024), default=1024, log=True)
+    sweepclauses = Integer("sweepclauses", (1, 1024 *1024), default=1024, log=True)
     sweepcomplete = Integer("sweepcomplete", (0, 1), default=0)
-    sweepdepth = Integer("sweepdepth", (0, 2000), default=2, log=True)
-    sweepfliprounds = Integer("sweepfliprounds", (0, 2000), default=1, log=True)
+    sweepdepth = Integer("sweepdepth", (1, 2000), default=2, log=True)
+    sweepfliprounds = Integer("sweepfliprounds", (1, 2000), default=1, log=True)
     sweepmaxclauses = Integer("sweepmaxclauses", (2, 32768 * 32768), default=32768, log=True)
     sweepmaxdepth = Integer("sweepmaxdepth", (1, 3000), default=3)
     sweepmaxvars = Integer("sweepmaxvars", (2, 8192 * 8192), default=8192, log=True)
     sweeprand = Integer("sweeprand", (0, 1), default=0)
-    sweepvars = Integer("sweepvars", (0, 256 * 1024), default=256, log=True)
+    sweepvars = Integer("sweepvars", (1, 256 * 1024), default=256, log=True)
     return [sweepclauses, sweepcomplete, sweepdepth, sweepfliprounds, sweepmaxclauses, sweepmaxdepth, sweepmaxvars, sweeprand, sweepvars]
 
 # no secondary options for target
