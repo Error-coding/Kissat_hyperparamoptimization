@@ -34,7 +34,7 @@ def getinstances():
         #print(df["local"].tolist())
         instlist = df["local"].tolist()
 
-    return list(map(lambda x : ("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances/train/" + x.split("/")[-1])[:-3], instlist))
+    return instlist
 
 def runKissat(args):
     start = time.time()
