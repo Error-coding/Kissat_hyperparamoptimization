@@ -25,6 +25,22 @@ paralleldeg = 32 #how many parallel threads are going to be scheduled
 
 inst = []
 
+def parse_dict_string(dict_string):
+    dict_string = dict_string.strip('{}')
+    items = dict_string.split(', ')
+    parsed_dict = {}
+    for item in items:
+        key, value = item.split(': ')
+        key = key.strip("'")
+        value = int(value)
+        parsed_dict[key] = value
+    return parsed_dict
+
+# Example usage
+dict_string = "{'backbone': 0, 'bump': 1, 'chrono': 1, 'congruence': 0, 'eliminate': 1, 'extract': 1, 'factor': 0, 'fastel': 1, 'forward': 1, 'lucky': 0, 'phase': 0, 'phasesaving': 0, 'preprocess': 0, 'probe': 1, 'randec': 1, 'reluctant': 0, 'reorder': 1, 'rephase': 0, 'restart': 1, 'stable': 0, 'substitute': 1, 'sweep': 1, 'target': 1, 'transitive': 0, 'vivify': 1, 'warmup': 0}"
+parsed_dict = parse_dict_string(dict_string)
+print(parsed_dict)
+
 def getinstances():
     instlist = []
     with GBD (["/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances/database/meta.db" , "/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances/database/instances.db"]) as gbd:
@@ -83,7 +99,7 @@ def runKissat(args):
         return 2 * timeout
 
 
-def train( seed: int = 0): #-> float
+def train( config,seed: int = 0): #-> float
     totaltime = 0
     called = 0
 
@@ -94,6 +110,9 @@ def train( seed: int = 0): #-> float
                 "--time=" + str(timeout),
                 "-q",
                 "-n")
+        for key in config:
+            arg = "--" + key + "=" + str(config[key])
+            args = args + (arg,)
         arglist.append(args)
     
     with pebble.ProcessPool(max_workers=paralleldeg) as p:
@@ -111,4 +130,7 @@ inst = getinstances()
 
 print(len(inst))
 
-print("Terminated after {} seconds".format(train()))
+
+args = parse_dict_string("{'backbone': 0, 'bump': 1, 'chrono': 1, 'congruence': 0, 'eliminate': 1, 'extract': 1, 'factor': 0, 'fastel': 1, 'forward': 1, 'lucky': 0, 'phase': 0, 'phasesaving': 0, 'preprocess': 0, 'probe': 1, 'randec': 1, 'reluctant': 0, 'reorder': 1, 'rephase': 0, 'restart': 1, 'stable': 0, 'substitute': 1, 'sweep': 1, 'target': 1, 'transitive': 0, 'vivify': 1, 'warmup': 0}")
+
+print("Terminated after {} seconds".format(train(args)))
