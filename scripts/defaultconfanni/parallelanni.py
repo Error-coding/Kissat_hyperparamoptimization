@@ -130,7 +130,7 @@ inst = getinstances()
 
 print(len(inst))
 
-
-args = parse_dict_string("{'backbone': 0, 'bump': 1, 'chrono': 1, 'congruence': 0, 'eliminate': 1, 'extract': 1, 'factor': 0, 'fastel': 1, 'forward': 1, 'lucky': 0, 'phase': 0, 'phasesaving': 0, 'preprocess': 0, 'probe': 1, 'randec': 1, 'reluctant': 0, 'reorder': 1, 'rephase': 0, 'restart': 1, 'stable': 0, 'substitute': 1, 'sweep': 1, 'target': 1, 'transitive': 0, 'vivify': 1, 'warmup': 0}")
+# anni1 "{'backbone': 0, 'bump': 1, 'chrono': 1, 'congruence': 0, 'eliminate': 1, 'extract': 1, 'factor': 0, 'fastel': 1, 'forward': 1, 'lucky': 0, 'phase': 0, 'phasesaving': 0, 'preprocess': 0, 'probe': 1, 'randec': 1, 'reluctant': 0, 'reorder': 1, 'rephase': 0, 'restart': 1, 'stable': 0, 'substitute': 1, 'sweep': 1, 'target': 1, 'transitive': 0, 'vivify': 1, 'warmup': 0}"
+args = parse_dict_string("{'backbone': 0, 'bump': 0, 'chrono': 0, 'congruence': 0, 'eliminate': 0, 'extract': 1, 'factor': 0, 'fastel': 1, 'forward': 1, 'lucky': 1, 'phase': 1, 'phasesaving': 1, 'preprocess': 1, 'probe': 0, 'randec': 0, 'reluctant': 0, 'reorder': 1, 'rephase': 1, 'restart': 0, 'stable': 2, 'substitute': 1, 'sweep': 1, 'target': 0, 'transitive': 1, 'vivify': 1, 'warmup': 1}")
 
 print("Terminated after {} seconds".format(train(args)))
