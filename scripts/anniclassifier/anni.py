@@ -59,7 +59,7 @@ def classify_instances():
             df = gbd.query('track=anni_2022 and track!=main_2023 and track!=main_2024 and minisat1m!=yes', resolve = features + ["instances:local"])
             X = df[features]
             y_pred = loaded_model.predict(X)
-            classifications = list(zip(df["instances:local"], y_pred))
+            classifications = list(zip(df["local"], y_pred))
             return classifications
 
 def runKissat(args):
