@@ -69,18 +69,16 @@ def runKissat(args):
                 reader = csv.DictReader(file)
                 for row in reader:
                     if row['key'] == filename and row['configuration'] == config_str:
-                        print("File has already been solved", flush=True)
                         return float(row['time'])
         except FileNotFoundError:
             pass
         return None
 
-    print("Checking if file already solved", flush=True)
     filename = args[1].split("/")[-1].split("-")[0]
     config_str = args[-1]
     resolved_time = check_resolved_csv(filename, config_str)
     if resolved_time is not None:
-        print(f"Instance {filename} with config {config_str} already resolved in {resolved_time} seconds")
+        print(f"Instance {filename} with config {config_str} already resolved in {resolved_time} seconds", flush=True)
         return resolved_time
 
 
@@ -127,8 +125,8 @@ def runKissat(args):
         fieldnames = ['key', 'time', 'configuration']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         
-        print("Writing to savefile: {}, {}".format(filename, config_str))
-        writer.writerow({filename, end - start, config_str})
+        #print("Writing to savefile: {}, {}".format(filename, config_str))
+        writer.writerow({'key': filename, 'time': end - start, 'configuration': config_str})
 
     if(status):
         print("Instance " + args[1] + "finished after {} seconds".format(end-start), flush=True)
