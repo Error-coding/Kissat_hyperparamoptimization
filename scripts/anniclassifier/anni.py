@@ -69,11 +69,13 @@ def runKissat(args):
                 reader = csv.DictReader(file)
                 for row in reader:
                     if row['key'] == filename and row['configuration'] == config_str:
+                        print("File has already been solved", flush=True)
                         return float(row['time'])
         except FileNotFoundError:
             pass
         return None
 
+    print("Checking if file already solved", flush=True)
     filename = args[1].split("/")[-1].split("-")[0]
     config_str = args[-1]
     resolved_time = check_resolved_csv(filename, config_str)
@@ -86,6 +88,7 @@ def runKissat(args):
     output = None
     try:
     # Run the subprocess without `check=True`
+        print(args[:-1], flush=True)
         output = subprocess.run(args[:-1], capture_output=True)
 
     # Check the returncode manually and handle 10 and 20 exit codes
