@@ -163,7 +163,10 @@ with open("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances/split
             lines = f.readlines()
             weights = []
             for i in lines:
-                weights.append((i.split("}: ")[0] + "}", len(i.split("}: ")[1].split(","))))
+                if not i.startswith("Default"):
+                    weights.append((i.split("}: ")[0] + "}", len(i.split("}: ")[1].split(","))))
+                else:
+                    weights.append(("Default", len(i.split(": ")[1].split(","))))
             weights.sort(key=lambda x: x[1], reverse=True)
             config = {}
             for config_str,_ in weights[:5]:
