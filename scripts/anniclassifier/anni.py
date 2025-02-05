@@ -21,7 +21,7 @@ import csv
 
 #instancegroup = int(sys.argv[1]) #index of the instance family group to get from gbd (family groups are defined in instance_families.txt)
 
-timeout = 1800
+timeout = 1800.0
 classifier = "/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scripts/anniclassifier/classifier_full.pkl"
 #kinstances = int(sys.argv[3]) #take k instances out of training set each run
 
@@ -69,7 +69,11 @@ def runKissat(args):
                 reader = csv.DictReader(file)
                 for row in reader:
                     if row['key'] == filename and row['configuration'] == config_str:
-                        return float(row['time'])
+                        time = float(row['time'])
+                        if time >= timeout:
+                            return 2 * timeout
+                        else:
+                            return time
         except FileNotFoundError:
             pass
         return None
