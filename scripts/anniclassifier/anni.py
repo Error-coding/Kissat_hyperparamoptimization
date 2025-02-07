@@ -22,7 +22,7 @@ import csv
 #instancegroup = int(sys.argv[1]) #index of the instance family group to get from gbd (family groups are defined in instance_families.txt)
 
 timeout = 1800.0
-classifier = "/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scripts/anniclassifier/classifier_full.pkl"
+classifier = "/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scripts/anniclassifier/top_15_conf.pkl"
 #kinstances = int(sys.argv[3]) #take k instances out of training set each run
 
  #how many times the train function is going to be called
@@ -155,7 +155,7 @@ def train(seed: int = 0): #-> float
                 "--time=" + str(timeout),
                 "-q",
                 "-n")
-        with open("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances/splits/splits_8_dic.txt", 'r') as f:
+        with open("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scripts/anniclassifier/top_15_conf.txt", 'r') as f:
             lines = f.readlines()
             config = {}
             if predclass >= len(lines):
