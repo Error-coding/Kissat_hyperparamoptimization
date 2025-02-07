@@ -169,7 +169,7 @@ with open("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances/split
                     weights.append(("Default", len(i.split(": ")[1].split(","))))
             weights.sort(key=lambda x: x[1], reverse=True)
             config = {} 
-            for config_str,_ in weights[5:15]:
+            for config_str,_ in weights[15:]:
                 if config_str.startswith("Default"):
                     config_str = "Default"
                     config = {}
