@@ -166,8 +166,7 @@ def train(seed: int = 0): #-> float
                 config_str = "Default"
                 config = {}
             else:
-                config_str, _ = line.split('}: ')
-                config_str += "}"
+                config_str= line
                 config = parse_dict_string(config_str)
         for key in config:
             arg = "--" + key + "=" + str(config[key])
