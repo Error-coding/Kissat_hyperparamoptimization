@@ -95,10 +95,11 @@ def runKissat(args):
 
     # Check the returncode manually and handle 10 and 20 exit codes
         if output.returncode not in {0, 10, 20}:
-            raise subprocess.CalledProcessError(output.returncode, args, output=output.stdout, stderr=output.stderr)
+            raise subprocess.CalledProcessError(output.returncode, args[:-1], output=output.stdout, stderr=output.stderr)
 
     except subprocess.CalledProcessError as e:
         print(f"Error in running kissat: {e}", flush=True)
+        return 2* timeout
     except Exception as e:
         print(f"Unexpected error: {e}", flush=True)
     
