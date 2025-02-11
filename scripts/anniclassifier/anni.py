@@ -21,7 +21,7 @@ import csv
 
 #instancegroup = int(sys.argv[1]) #index of the instance family group to get from gbd (family groups are defined in instance_families.txt)
 
-timeout = 1800.0
+timeout = 1800
 classifier = "/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scripts/anniclassifier/random_forest_top15.pkl"
 #kinstances = int(sys.argv[3]) #take k instances out of training set each run
 
