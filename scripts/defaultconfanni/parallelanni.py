@@ -7,6 +7,8 @@ import pebble
 from smac import HyperparameterOptimizationFacade, Scenario
 from ConfigSpace import Configuration, ConfigurationSpace, EqualsCondition, Categorical, Integer
 import subprocess
+import csv
+
 
 from gbd_core.api import GBD
 from concurrent.futures import as_completed
@@ -37,7 +39,7 @@ def parse_dict_string(dict_string):
     return parsed_dict
 
 # Example usage
-dict_string = "{'backbone': 0, 'bump': 1, 'chrono': 1, 'congruence': 0, 'eliminate': 1, 'extract': 1, 'factor': 0, 'fastel': 1, 'forward': 1, 'lucky': 0, 'phase': 0, 'phasesaving': 0, 'preprocess': 0, 'probe': 1, 'randec': 1, 'reluctant': 0, 'reorder': 1, 'rephase': 0, 'restart': 1, 'stable': 0, 'substitute': 1, 'sweep': 1, 'target': 1, 'transitive': 0, 'vivify': 1, 'warmup': 0}"
+dict_string = "{'backbone': 2, 'bump': 1, 'chrono': 0, 'congruence': 1, 'eliminate': 1, 'extract': 0, 'factor': 0, 'fastel': 1, 'forward': 0, 'lucky': 1, 'phase': 0, 'phasesaving': 1, 'preprocess': 0, 'probe': 1, 'randec': 0, 'reluctant': 0, 'reorder': 2, 'rephase': 1, 'restart': 1, 'stable': 0, 'substitute': 1, 'sweep': 1, 'target': 0, 'transitive': 1, 'vivify': 1, 'warmup': 1}"
 parsed_dict = parse_dict_string(dict_string)
 print(parsed_dict)
 
@@ -53,18 +55,43 @@ def getinstances():
     return instlist
 
 def runKissat(args):
+    def check_resolved_csv(filename, config_str):
+        try:
+            with open('/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances/records/resolved.csv', mode='r') as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    if row['key'] == filename and row['configuration'] == config_str:
+                        time = float(row['time'])
+                        if time >= timeout:
+                            return 2 * timeout
+                        else:
+                            return time
+        except FileNotFoundError:
+            pass
+        return None
+
+    filename = args[1].split("/")[-1].split("-")[0]
+    config_str = args[-1]
+    resolved_time = check_resolved_csv(filename, config_str)
+    if resolved_time is not None:
+        print(f"Instance {filename} with config {config_str} already resolved in {resolved_time} seconds", flush=True)
+        return resolved_time
+
+
     start = time.time()
     output = None
     try:
     # Run the subprocess without `check=True`
-        output = subprocess.run(args, capture_output=True)
+        print(args[:-1], flush=True)
+        output = subprocess.run(args[:-1], capture_output=True)
 
     # Check the returncode manually and handle 10 and 20 exit codes
         if output.returncode not in {0, 10, 20}:
-            raise subprocess.CalledProcessError(output.returncode, args, output=output.stdout, stderr=output.stderr)
+            raise subprocess.CalledProcessError(output.returncode, args[:-1], output=output.stdout, stderr=output.stderr)
 
     except subprocess.CalledProcessError as e:
         print(f"Error in running kissat: {e}", flush=True)
+        return 2* timeout
     except Exception as e:
         print(f"Unexpected error: {e}", flush=True)
     
@@ -91,6 +118,13 @@ def runKissat(args):
             print("Solver failed", flush=True)
             status = False
 
+    with open("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/instances/records/resolved.csv", 'a', newline='') as csvfile:
+        fieldnames = ['key', 'time', 'configuration']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        
+        #print("Writing to savefile: {}, {}".format(filename, config_str))
+        writer.writerow({'key': filename, 'time': end - start, 'configuration': config_str})
+
     if(status):
         print("Instance " + args[1] + "finished after {} seconds".format(end-start), flush=True)
         return end - start
@@ -113,7 +147,7 @@ def train( config,seed: int = 0): #-> float
         for key in config:
             arg = "--" + key + "=" + str(config[key])
             args = args + (arg,)
-        arglist.append(args)
+        arglist.append(args + (dict_string,))
     
     with pebble.ProcessPool(max_workers=paralleldeg) as p:
         futures = [p.schedule(runKissat, (args,)) for args in arglist]
@@ -131,6 +165,6 @@ inst = getinstances()
 print(len(inst))
 
 # anni1 "{'backbone': 0, 'bump': 1, 'chrono': 1, 'congruence': 0, 'eliminate': 1, 'extract': 1, 'factor': 0, 'fastel': 1, 'forward': 1, 'lucky': 0, 'phase': 0, 'phasesaving': 0, 'preprocess': 0, 'probe': 1, 'randec': 1, 'reluctant': 0, 'reorder': 1, 'rephase': 0, 'restart': 1, 'stable': 0, 'substitute': 1, 'sweep': 1, 'target': 1, 'transitive': 0, 'vivify': 1, 'warmup': 0}"
-args = parse_dict_string("{'backbone': 0, 'bump': 0, 'chrono': 0, 'congruence': 0, 'eliminate': 0, 'extract': 1, 'factor': 0, 'fastel': 1, 'forward': 1, 'lucky': 1, 'phase': 1, 'phasesaving': 1, 'preprocess': 1, 'probe': 0, 'randec': 0, 'reluctant': 0, 'reorder': 1, 'rephase': 1, 'restart': 0, 'stable': 2, 'substitute': 1, 'sweep': 1, 'target': 0, 'transitive': 1, 'vivify': 1, 'warmup': 1}")
+args = parse_dict_string(dict_string)
 
 print("Terminated after {} seconds".format(train(args)))
