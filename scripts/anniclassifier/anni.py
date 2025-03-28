@@ -22,7 +22,7 @@ import csv
 #instancegroup = int(sys.argv[1]) #index of the instance family group to get from gbd (family groups are defined in instance_families.txt)
 
 timeout = 1800
-classifier = "/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scripts/anniclassifier/random_forest_famcluster10.pkl"
+classifier = "/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scripts/anniclassifier/modelk9.pkl"
 #kinstances = int(sys.argv[3]) #take k instances out of training set each run
 
  #how many times the train function is going to be called
@@ -102,6 +102,7 @@ def runKissat(args):
         return 2* timeout
     except Exception as e:
         print(f"Unexpected error: {e}", flush=True)
+        return 2 * timeout
     
     end = time.time()
 
@@ -156,19 +157,19 @@ def train(seed: int = 0): #-> float
                 "--time=" + str(timeout),
                 "-q",
                 "-n")
-        with open("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scripts/anniclassifier/famcluster10.txt", 'r') as f:
-            lines = f.readlines()
+        #with open("/nfs/home/rzipperer/git/Kissat_hyperparamoptimization/scripts/anniclassifier/famcluster10.txt", 'r') as f:
+        #    lines = f.readlines()
+        #    config = {}
+        #    if predclass >= len(lines):
+        #        print(f"Predicted class {predclass} is out of range, skipping this instance.")
+        #        continue
+        #    line = lines[predclass].strip()
+        if predclass:
+            config_str = "Default"
             config = {}
-            if predclass >= len(lines):
-                print(f"Predicted class {predclass} is out of range, skipping this instance.")
-                continue
-            line = lines[predclass].strip()
-            if line.startswith("Default"):
-                config_str = "Default"
-                config = {}
-            else:
-                config_str= line
-                config = parse_dict_string(config_str)
+        else:
+            config_str= predclass
+            config = parse_dict_string(config_str)
         for key in config:
             arg = "--" + key + "=" + str(config[key])
             args = args + (arg,)
