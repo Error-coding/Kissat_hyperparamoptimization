@@ -164,7 +164,7 @@ def train(seed: int = 0): #-> float
         #        print(f"Predicted class {predclass} is out of range, skipping this instance.")
         #        continue
         #    line = lines[predclass].strip()
-        if predclass:
+        if "Default" in str(predclass):
             config_str = "Default"
             config = {}
         else:
