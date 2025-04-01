@@ -135,10 +135,10 @@ def runKissat(args):
         writer.writerow({'key': filename, 'time': end - start, 'configuration': config_str})
 
     if(status):
-        print("Instance " + args[1] + "finished after {} seconds".format(end-start), flush=True)
+        print("Instance " + args[1] +  " with config {} finished after {} seconds".format(config_str, end-start), flush=True)
         return end - start
     else:
-        print("TIMEOUT: Instance " + args[1] + " has reached timeout, punishment {} seconds".format(2 * timeout), flush=True)
+        print("TIMEOUT: Instance " + args[1] + " with config {} has reached timeout, punishment {} seconds".format(config_str, 2 * timeout), flush=True)
         return 2 * timeout
 
 
