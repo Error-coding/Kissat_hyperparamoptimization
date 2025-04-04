@@ -39,7 +39,8 @@ def parse_dict_string(dict_string):
     return parsed_dict
 
 # Example usage
-dict_string = "{'backbone': 2, 'bump': 0, 'chrono': 0, 'congruence': 1, 'eliminate': 0, 'extract': 1, 'factor': 1, 'fastel': 0, 'forward': 0, 'lucky': 0, 'phase': 0, 'phasesaving': 1, 'preprocess': 0, 'probe': 0, 'randec': 1, 'reluctant': 1, 'reorder': 2, 'rephase': 1, 'restart': 1, 'stable': 2, 'substitute': 1, 'sweep': 0, 'target': 1, 'transitive': 1, 'vivify': 0, 'warmup': 0}"
+dict_string = "{'backbone': 2, 'bump': 1, 'chrono': 0, 'congruence': 0, 'eliminate': 1, 'extract': 1, 'factor': 1, 'fastel': 0, 'forward': 0, 'lucky': 1, 'phase': 0, 'phasesaving': 1, 'preprocess': 1, 'probe': 1, 'randec': 1, 'reluctant': 0, 'reorder': 2, 'rephase': 1, 'restart': 0, 'stable': 2, 'substitute': 0, 'sweep': 1, 'target': 2, 'transitive': 0, 'vivify': 1, 'warmup': 0}"
+
 
 parsed_dict = parse_dict_string(dict_string)
 print(parsed_dict)
